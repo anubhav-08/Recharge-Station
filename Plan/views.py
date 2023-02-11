@@ -8,6 +8,7 @@ from .serializers import PlanSerializer
 from .models import Plan, Company
 # Create your views here.
 
+# To get list of plans available for that that particular company
 class PlanListView(GenericAPIView):
     serializer_class = PlanSerializer
 
@@ -25,6 +26,7 @@ class PlanListView(GenericAPIView):
         serializer = self.serializer_class(qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+# To get the particular selected plan
 class PlanAPIView(GenericAPIView):
     serializer_class = PlanSerializer
 
