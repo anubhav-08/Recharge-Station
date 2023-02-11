@@ -11,7 +11,7 @@ from .models import Plan, Company
 class PlanListView(GenericAPIView):
     serializer_class = PlanSerializer
 
-    def get_queryset(self, company):
+    def get_queryset(self, company=None):
         return Plan.objects.filter(company = company)
     
     def get(self, request):
@@ -20,6 +20,7 @@ class PlanListView(GenericAPIView):
             company = Company.objects.get(name=company)
         except :
             return Response({"message" : "Invalid Company Selected"}, status=status.HTTP_400_BAD_REQUEST)
+        
         qs = self.get_queryset(company)
         serializer = self.serializer_class(qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

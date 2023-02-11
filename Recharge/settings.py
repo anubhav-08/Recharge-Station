@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Register apps
     'Plan',
+    'Transaction',
 
     # Third party apps
     'rest_framework',
