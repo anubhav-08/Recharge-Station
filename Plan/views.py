@@ -14,8 +14,8 @@ class PlanListView(GenericAPIView):
     def get_queryset(self, company=None):
         return Plan.objects.filter(company = company)
     
-    def get(self, request):
-        company = request.query_params['company']
+    def get(self, request, company):
+        # company = request.query_params['company']
         try:
             company = Company.objects.get(name=company)
         except :
@@ -28,8 +28,8 @@ class PlanListView(GenericAPIView):
 class PlanAPIView(GenericAPIView):
     serializer_class = PlanSerializer
 
-    def get(self, request):
-        _id = request.query_params['id']
+    def get(self, request, _id):
+        # _id = request.query_params['id']
         plan = Plan.objects.get(id = _id)
         serializer = self.serializer_class(plan)
         return Response(serializer.data, status=status.HTTP_200_OK)
